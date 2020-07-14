@@ -2,7 +2,6 @@ package net.avicus.atlas.core.channel;
 
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
-import net.avicus.atlas.core.component.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;

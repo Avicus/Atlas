@@ -63,6 +63,9 @@ public class AtlasConfig {
   @ConfigPath("github")
   @ConfigKey(key = "token")
   private static String githubToken;
+  @Getter
+  @ConfigKey(key = "send-deprecation-warnings")
+  private static boolean sendDeprecationWarnings;
 
   @ConfigPath("website")
   public static class Website {
@@ -79,10 +82,6 @@ public class AtlasConfig {
       return base + map.replace("{0}", slug);
     }
   }
-
-  @Getter
-  @ConfigKey(key = "send-deprecation-warnings")
-  private static boolean sendDeprecationWarnings;
 
   @ConfigPath("chat")
   public static class Chat {

@@ -40,10 +40,6 @@ public class AnnounceCommands {
     sender.sendMessage("Message sent!");
   }
 
-  public enum AnnounceType {
-    NO_PREFIX, MESSAGE, CRITICAL
-  }
-
   private static void send(String message, AnnounceType type) {
     TextComponent prefix;
     if (type == AnnounceType.NO_PREFIX) {
@@ -57,6 +53,10 @@ public class AnnounceCommands {
     BaseComponent send = new TextComponent(prefix,
         new TextComponent(ChatColor.translateAlternateColorCodes('&', message)));
     Bukkit.broadcast(send);
+  }
+
+  public enum AnnounceType {
+    NO_PREFIX, MESSAGE, CRITICAL
   }
 
   public static class Parent {

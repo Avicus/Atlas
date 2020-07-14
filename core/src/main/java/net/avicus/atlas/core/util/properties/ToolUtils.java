@@ -220,8 +220,9 @@ public class ToolUtils {
         // More Workarounds:
         // TODO: Consider checking a generic workaround (based on duration, assuming some dig packets lost, proportional to duration etc.).
         if (toolProps.materialBase == Props.MaterialBase.WOOD) {
-          if (toolProps.toolType == Props.ToolType.PICKAXE && (blockProps == BlockPropStore.ironDoorType
-              || blockProps == BlockPropStore.dispenserType)) {
+          if (toolProps.toolType == Props.ToolType.PICKAXE && (
+              blockProps == BlockPropStore.ironDoorType
+                  || blockProps == BlockPropStore.dispenserType)) {
             // Special correction.
             // TODO: Uncomfortable: hide this in the blocks by some flags / other type of workarounds !
             if (blockProps == BlockPropStore.dispenserType) {

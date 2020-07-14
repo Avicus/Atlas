@@ -34,13 +34,6 @@ public class MessageCommands implements CommandComponent {
       Messages.PRIVATE_MESSAGES,
       Messages.PRIVATE_MESSAGES_SUMMARY
   );
-
-  public enum PrivateMessageScope {
-    ALL,
-    FRIENDS,
-    OFF
-  }
-
   private final static Map<UUID, UUID> lastMessages = new HashMap<>();
 
   private static boolean shouldDeliver(Player from, Player to) {
@@ -139,5 +132,11 @@ public class MessageCommands implements CommandComponent {
   @Override
   public void registerCommands(CommandsManagerRegistration registrar) {
     registrar.register(MessageCommands.class);
+  }
+
+  public enum PrivateMessageScope {
+    ALL,
+    FRIENDS,
+    OFF
   }
 }

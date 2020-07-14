@@ -46,8 +46,7 @@ public abstract class ShopItem {
    * @param name The name of the item.
    * @param description List of description lines for the item. This will never be null, but can be
    * empty.
-   * @param icon The icon which should be used for the corresponding {@link
-   * ShopMenuItem}.
+   * @param icon The icon which should be used for the corresponding {@link ShopMenuItem}.
    * @param purchaseCheck The check that should be ran before this item can be purchased.
    */
   public ShopItem(int price,

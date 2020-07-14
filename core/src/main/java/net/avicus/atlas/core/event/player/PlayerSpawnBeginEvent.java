@@ -9,8 +9,8 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
 /**
- * An event that is fired when a player spawns into a {@link Match}. Event is
- * called before they are teleported or given a loadout.
+ * An event that is fired when a player spawns into a {@link Match}. Event is called before they are
+ * teleported or given a loadout.
  */
 public class PlayerSpawnBeginEvent extends PlayerEvent {
 

@@ -67,7 +67,6 @@ import net.avicus.atlas.core.util.AtlasBridge;
 import net.avicus.atlas.core.util.AtlasTask;
 import net.avicus.atlas.core.util.Events;
 import net.avicus.atlas.core.util.Messages;
-import net.avicus.compendium.locale.TranslationProvider;
 import net.avicus.atlas.core.util.Translations;
 import net.avicus.atlas.core.util.properties.BlockPropStore;
 import net.avicus.compendium.AvicusBukkitCommandManager;
@@ -75,6 +74,7 @@ import net.avicus.compendium.AvicusCommandsManager;
 import net.avicus.compendium.commands.AvicusCommandsRegistration;
 import net.avicus.compendium.commands.exception.AbstractTranslatableCommandException;
 import net.avicus.compendium.config.Config;
+import net.avicus.compendium.locale.TranslationProvider;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.compendium.settings.PlayerSettings;
 import org.bukkit.Bukkit;
@@ -89,8 +89,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Atlas extends JavaPlugin {
 
-  private AtomicBoolean ready = new AtomicBoolean(false);
   private static Atlas instance;
+  private AtomicBoolean ready = new AtomicBoolean(false);
   private AvicusCommandsManager commandManager;
   @Getter
   @Setter
