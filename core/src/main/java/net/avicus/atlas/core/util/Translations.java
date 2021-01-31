@@ -38,6 +38,8 @@ public final class Translations {
   public static final LocalizedFormat MODULE_OBSERVER_MENU_ERROR_OPEN_PARTICIPANT = $NULL$;
   public static final LocalizedFormat SETTING_DEATHMESSAGE_NAME = $NULL$;
   public static final LocalizedFormat SETTING_DEATHMESSAGE_DESCRIPTION = $NULL$;
+  public static final LocalizedFormat SETTING_VOTESHOW_NAME = $NULL$;
+  public static final LocalizedFormat SETTING_VOTESHOW_DESCRIPTION = $NULL$;
   public static final LocalizedFormat TYPE_BOOLEAN_TRUE = $NULL$;
   public static final LocalizedFormat TYPE_BOOLEAN_FALSE = $NULL$;
   public static final LocalizedFormat VISUAL_EFFECT_BLOOD_SETTING_NAME = $NULL$;

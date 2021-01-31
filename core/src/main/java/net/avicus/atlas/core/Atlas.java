@@ -62,6 +62,7 @@ import net.avicus.atlas.core.match.MatchManager;
 import net.avicus.atlas.core.module.kills.DeathMessage;
 import net.avicus.atlas.core.module.observer.ObserverCommands;
 import net.avicus.atlas.core.module.vote.VoteCommands;
+import net.avicus.atlas.core.module.vote.VoteModule;
 import net.avicus.atlas.core.restart.RestartCommands;
 import net.avicus.atlas.core.util.AtlasBridge;
 import net.avicus.atlas.core.util.AtlasTask;
@@ -228,6 +229,8 @@ public class Atlas extends JavaPlugin {
     this.matchManager = new MatchManager(this.matchFactory, rotation);
 
     PlayerSettings.register(DeathMessage.SETTING);
+    PlayerSettings.register(VoteModule.SETTING);
+
 
     try {
       this.matchManager.start();
