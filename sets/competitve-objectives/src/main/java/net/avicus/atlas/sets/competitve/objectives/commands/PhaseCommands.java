@@ -38,7 +38,8 @@ import org.joda.time.Duration;
 
 public class PhaseCommands {
 
-  private static final String LINE = ChatColor.GOLD + ChatColor.STRIKETHROUGH.toString() + "------" + ChatColor.RESET;
+  private static final String LINE =
+      ChatColor.GOLD + ChatColor.STRIKETHROUGH.toString() + "------" + ChatColor.RESET;
   private static final String INDENT = "  ";
 
   private static Match getMatch(CommandSender sender) throws CommandException {
@@ -68,42 +69,60 @@ public class PhaseCommands {
       throws CommandException {
     List<BaseComponent> rows = Lists.newArrayList();
     Map<DestroyablePhase, List<DestroyableObjective>> phases = getBridge(sender).getPhases();
-    if (phases.keySet().isEmpty()) throw new TranslatableCommandWarningException(new UnlocalizedFormat("This map doesn't have any registered phases"));
+    if (phases.keySet().isEmpty()) {
+      throw new TranslatableCommandWarningException(
+          new UnlocalizedFormat("This map doesn't have any registered phases"));
+    }
 
     rows.add(new TextComponent(LINE + ChatColor.YELLOW + " Destroyable Phases " + LINE));
     phases.forEach((phase, obs) -> {
       rows.addAll(describePhase("", phase, sender));
       rows.add(new TextComponent(INDENT + ChatColor.GOLD + "Applies to: " + StringUtil
-          .listToEnglishCompound(obs.stream().map(o -> o.getName(sender)).collect(Collectors.toList()))));
+          .listToEnglishCompound(
+              obs.stream().map(o -> o.getName(sender)).collect(Collectors.toList()))));
     });
 
     rows.forEach(sender::sendMessage);
   }
 
-  private static List<BaseComponent> describePhase(String prefix, DestroyablePhase phase, CommandSender viewer) {
+  private static List<BaseComponent> describePhase(String prefix, DestroyablePhase phase,
+      CommandSender viewer) {
     List<BaseComponent> rows = Lists.newArrayList();
 
-    rows.add(new UnlocalizedFormat(prefix + "{0} ({1})").with(phase.getName().toText(), new UnlocalizedText(phase.getId())).translate(viewer));
-    rows.add(new TextComponent(prefix + INDENT + ChatColor.YELLOW + StringUtil.listToEnglishCompound(phase.describeReplacementStrategy())));
-    rows.add(new TextComponent(prefix + INDENT + ChatColor.BLUE + "Applied After: " + ChatColor.AQUA + StringUtil.secondsToClock((int) phase.getDelay().getStandardSeconds())));
+    rows.add(new UnlocalizedFormat(prefix + "{0} ({1})")
+        .with(phase.getName().toText(), new UnlocalizedText(phase.getId())).translate(viewer));
+    rows.add(new TextComponent(prefix + INDENT + ChatColor.YELLOW + StringUtil
+        .listToEnglishCompound(phase.describeReplacementStrategy())));
+    rows.add(new TextComponent(
+        prefix + INDENT + ChatColor.BLUE + "Applied After: " + ChatColor.AQUA + StringUtil
+            .secondsToClock((int) phase.getDelay().getStandardSeconds())));
     if (phase.getPassPhase().isPresent()) {
-      rows.add(new TextComponent(prefix + INDENT + ChatColor.GREEN + "Phase Applied if Application Check Passes:"));
+      rows.add(new TextComponent(
+          prefix + INDENT + ChatColor.GREEN + "Phase Applied if Application Check Passes:"));
       rows.addAll(describePhase(prefix + INDENT + INDENT, phase.getPassPhase().get(), viewer));
     }
     if (phase.getFailPhase().isPresent()) {
-      rows.add(new TextComponent(prefix + INDENT + ChatColor.RED + "Phase Applied if Application Check Fails:"));
+      rows.add(new TextComponent(
+          prefix + INDENT + ChatColor.RED + "Phase Applied if Application Check Fails:"));
       rows.addAll(describePhase(prefix + INDENT + INDENT, phase.getFailPhase().get(), viewer));
     }
     return rows;
   }
 
-  private static DestroyablePhase getPhase(CommandSender sender, String id) throws CommandException {
+  private static DestroyablePhase getPhase(CommandSender sender, String id)
+      throws CommandException {
     Match match = getMatch(sender);
     MatchRegistry registry = match.getRegistry();
 
-    if (!registry.has(id)) throw new TranslatableCommandErrorException(new UnlocalizedFormat("Object with ID \"" + id + "\" not found."));
+    if (!registry.has(id)) {
+      throw new TranslatableCommandErrorException(
+          new UnlocalizedFormat("Object with ID \"" + id + "\" not found."));
+    }
 
-    if (!registry.isOfType(id, DestroyablePhase.class)) throw new TranslatableCommandErrorException(new UnlocalizedFormat("Object with ID \"" + id + "\" is not a destroyable phase."));
+    if (!registry.isOfType(id, DestroyablePhase.class)) {
+      throw new TranslatableCommandErrorException(
+          new UnlocalizedFormat("Object with ID \"" + id + "\" is not a destroyable phase."));
+    }
 
     return registry.get(DestroyablePhase.class, id, true).get();
   }
@@ -114,7 +133,9 @@ public class PhaseCommands {
     String id = args.getString(0);
 
     DestroyablePhase found = getPhase(sender, id);
-    CompendiumPlugin.getInstance().getCountdownManager().cancelAll(c -> c instanceof PhaseApplyCountdown && ((PhaseApplyCountdown) c).getPhase().equals(found));
+    CompendiumPlugin.getInstance().getCountdownManager().cancelAll(
+        c -> c instanceof PhaseApplyCountdown && ((PhaseApplyCountdown) c).getPhase()
+            .equals(found));
 
     ObjectivesBridge bridge = getBridge(sender);
     bridge.getPhases().remove(found);
@@ -124,7 +145,9 @@ public class PhaseCommands {
     }
 
     for (DestroyableObjective objective : bridge.getObjectivesWithPhases()) {
-      if (objective.getPhase().get().equals(found)) objective.setPhase(Optional.empty());
+      if (objective.getPhase().get().equals(found)) {
+        objective.setPhase(Optional.empty());
+      }
     }
 
     bridge.populatePhaseCache();
@@ -142,8 +165,12 @@ public class PhaseCommands {
     found.setDelay(delay);
     for (Entry<Countdown, CountdownTask> entry : CompendiumPlugin
         .getInstance().getCountdownManager().getCountdowns().entrySet()) {
-      if (!(entry.getKey() instanceof PhaseApplyCountdown)) continue;
-      if (!((PhaseApplyCountdown) entry.getKey()).getPhase().equals(found)) continue;
+      if (!(entry.getKey() instanceof PhaseApplyCountdown)) {
+        continue;
+      }
+      if (!((PhaseApplyCountdown) entry.getKey()).getPhase().equals(found)) {
+        continue;
+      }
 
       entry.getValue().setNewDuration(delay);
     }
@@ -156,6 +183,7 @@ public class PhaseCommands {
   }
 
   public static class Super {
+
     @Command(aliases = "phase", usage = "<>", desc = ".", min = 1)
     @NestedCommand(PhaseCommands.class)
     public static void phase(CommandContext cmd, CommandSender sender) {

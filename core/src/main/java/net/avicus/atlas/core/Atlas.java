@@ -231,7 +231,6 @@ public class Atlas extends JavaPlugin {
     PlayerSettings.register(DeathMessage.SETTING);
     PlayerSettings.register(VoteModule.SETTING);
 
-
     try {
       this.matchManager.start();
     } catch (IOException e) {

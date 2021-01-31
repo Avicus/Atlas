@@ -106,7 +106,8 @@ public class ResultsModule extends BridgeableModule<ModuleBridge<ResultsModule>>
       }
 
       for (Competitor competitor : groups.getCompetitors()) {
-        CompetitorCompletionState completionState = new CompetitorCompletionState(match, competitor);
+        CompetitorCompletionState completionState = new CompetitorCompletionState(match,
+            competitor);
         states.add(completionState);
         if (completionState.shouldWin()) {
           winners.add(competitor);

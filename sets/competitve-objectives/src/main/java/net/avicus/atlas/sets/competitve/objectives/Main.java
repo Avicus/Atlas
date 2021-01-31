@@ -51,13 +51,13 @@ import net.avicus.compendium.commands.AvicusCommandsRegistration;
 public class Main extends ModuleSet {
 
   @Setter
+  AvicusCommandsRegistration registrar;
+  @Setter
   private Atlas atlas;
   @Setter
   private MatchFactory matchFactory;
   @Setter
   private Logger logger;
-  @Setter
-  AvicusCommandsRegistration registrar;
 
   @Override
   public void onEnable() {

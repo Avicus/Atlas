@@ -65,14 +65,6 @@ public class DestroyablePhase implements RegisterableObject<DestroyablePhase> {
    * Material that the blocks will be changed to.
    */
   private final LinkedHashMap<MultiMaterialMatcher, SingleMaterialMatcher> materials;
-
-  /**
-   * Delay before the phase is applied. (The countdown will be started at match start OR when the
-   * preceding phase is applied.)
-   */
-  @Setter
-  private Duration delay;
-
   /**
    * Check to be ran before the phase is applied.
    */
@@ -85,6 +77,13 @@ public class DestroyablePhase implements RegisterableObject<DestroyablePhase> {
    * Delay between retry attempts.
    */
   private final Optional<Duration> retryDelay;
+  private final HashMap<DestroyableObjective, AtomicInteger> failures = new HashMap<>();
+  /**
+   * Delay before the phase is applied. (The countdown will be started at match start OR when the
+   * preceding phase is applied.)
+   */
+  @Setter
+  private Duration delay;
   /**
    * Phase that will be applied if the check fails and there are no retry attempts remaining.
    */
@@ -93,8 +92,6 @@ public class DestroyablePhase implements RegisterableObject<DestroyablePhase> {
    * Phase that will be applied if the check passes.
    */
   private Optional<DestroyablePhase> passPhase;
-
-  private final HashMap<DestroyableObjective, AtomicInteger> failures = new HashMap<>();
 
   /**
    * Constructor.
@@ -251,12 +248,18 @@ public class DestroyablePhase implements RegisterableObject<DestroyablePhase> {
 
   public void removePhase(DestroyablePhase phase) {
     if (this.passPhase.isPresent()) {
-      if (this.passPhase.get().equals(phase)) this.passPhase = Optional.empty();
-      else this.passPhase.get().removePhase(phase);
+      if (this.passPhase.get().equals(phase)) {
+        this.passPhase = Optional.empty();
+      } else {
+        this.passPhase.get().removePhase(phase);
+      }
     }
     if (this.failPhase.isPresent()) {
-      if (this.failPhase.get().equals(phase)) this.failPhase = Optional.empty();
-      else this.failPhase.get().removePhase(phase);
+      if (this.failPhase.get().equals(phase)) {
+        this.failPhase = Optional.empty();
+      } else {
+        this.failPhase.get().removePhase(phase);
+      }
     }
   }
 

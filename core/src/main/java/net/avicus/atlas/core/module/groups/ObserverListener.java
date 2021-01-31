@@ -38,10 +38,9 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class ObserverListener implements Listener {
 
-  private final GroupsModule module;
-
   private static final Set<Material> TOOL_TYPES =
       Sets.newHashSet(Material.COMPASS, Material.WOOD_AXE);
+  private final GroupsModule module;
 
   public ObserverListener(GroupsModule module) {
     this.module = module;

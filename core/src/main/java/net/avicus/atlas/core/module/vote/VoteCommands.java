@@ -77,10 +77,12 @@ public final class VoteCommands {
               ChatColor.GRAY.toString());
       source.sendMessage(Messages.VOTE_SET.with(ChatColor.GRAY, new UnlocalizedText(mapNames)));
       if (args.hasFlag('c')) {
-        StaffChannels.MAPDEV_CHANNEL.send(null, new TextComponent(source.getName() + " queued a vote for " + ChatColor.stripColor(mapNames)));
+        StaffChannels.MAPDEV_CHANNEL.send(null, new TextComponent(
+            source.getName() + " queued a vote for " + ChatColor.stripColor(mapNames)));
         source.sendMessage(Messages.VOTE_DELAY.with(ChatColor.GREEN));
       } else {
-        StaffChannels.MAPDEV_CHANNEL.send(null, new TextComponent(source.getName() + " started a vote for " + ChatColor.stripColor(mapNames)));
+        StaffChannels.MAPDEV_CHANNEL.send(null, new TextComponent(
+            source.getName() + " started a vote for " + ChatColor.stripColor(mapNames)));
       }
     }
 

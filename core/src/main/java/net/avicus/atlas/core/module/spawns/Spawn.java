@@ -74,7 +74,9 @@ public class Spawn {
     this.ensureSafe = ensureSafe;
   }
 
-  /** Select a region, spreading players out evenly regardless of relation **/
+  /**
+   * Select a region, spreading players out evenly regardless of relation
+   **/
   private static SpawnRegion selectSpread(Match match, Player player, List<SpawnRegion> regions) {
     Map<SpawnRegion, Double> minimumDistances = new HashMap<>();
 
@@ -106,7 +108,9 @@ public class Spawn {
     return selected;
   }
 
-  /** Select a region, spreading players out so they are furthest away from enemies **/
+  /**
+   * Select a region, spreading players out so they are furthest away from enemies
+   **/
   private static SpawnRegion selectSafe(Match match, Player player, List<SpawnRegion> regions) {
     SpawnRegion selected = null;
 
@@ -145,7 +149,9 @@ public class Spawn {
     return regions.get(RANDOM.nextInt(regions.size()));
   }
 
-  /** Find a position in a region which is safe. Will return null if region has no safe places **/
+  /**
+   * Find a position in a region which is safe. Will return null if region has no safe places
+   **/
   private static Vector findSafePosition(Match match, SpawnRegion region) {
     int attempts = 0;
     AtomicInteger regionSize = new AtomicInteger();
@@ -156,7 +162,9 @@ public class Spawn {
       Location loc = position.toLocation(match.getWorld());
       boolean safe = false;
 
-      if (loc.getBlock().getRelative(BlockFace.UP).getRelative(BlockFace.UP).getType().isSolid()) continue;
+      if (loc.getBlock().getRelative(BlockFace.UP).getRelative(BlockFace.UP).getType().isSolid()) {
+        continue;
+      }
 
       for (int y = loc.getBlockY(); y >= loc.getBlockY() - 10; y--) {
         if (match.getWorld().getBlockAt(new Location(match.getWorld(), loc.getX(), y, loc.getZ()))
@@ -166,7 +174,9 @@ public class Spawn {
         }
       }
 
-      if (safe) break;
+      if (safe) {
+        break;
+      }
       position = null;
       attempts++;
     }
@@ -174,8 +184,11 @@ public class Spawn {
     return position;
   }
 
-  /** Try to find a safe place in the pre-selected region first, then fallback to checking the rest **/
-  private static Vector ensureSafe(Match match, SpawnRegion selected, List<SpawnRegion> regions, Player player) {
+  /**
+   * Try to find a safe place in the pre-selected region first, then fallback to checking the rest
+   **/
+  private static Vector ensureSafe(Match match, SpawnRegion selected, List<SpawnRegion> regions,
+      Player player) {
     Vector position = null;
 
     List<SpawnRegion> regionsToTry = new ArrayList<>(regions);
@@ -185,11 +198,14 @@ public class Spawn {
 
     for (SpawnRegion region : regionsToTry) {
       position = findSafePosition(match, region);
-      if (position != null) break;
+      if (position != null) {
+        break;
+      }
     }
 
     if (position == null) {
-      StaffChannels.MAPDEV_CHANNEL.send(null, new TextComponent("Failed to find suitable spawn position for " + player.getName()));
+      StaffChannels.MAPDEV_CHANNEL.send(null,
+          new TextComponent("Failed to find suitable spawn position for " + player.getName()));
       position = selectRandom(regions).randomPosition(RANDOM);
     }
 

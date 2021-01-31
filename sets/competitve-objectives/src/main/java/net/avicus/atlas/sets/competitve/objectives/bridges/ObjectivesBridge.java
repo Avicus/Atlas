@@ -55,13 +55,12 @@ public class ObjectivesBridge extends ObjectivesModuleBridge implements Listener
   private final List<WoolObjective> wools;
   private final List<FlagObjective> flags;
   private final List<LeakableObjective> leakables;
-  List<Objective> objectives;
-  private Match match;
-  private ObjectivesModule module;
-
   // Phase caches
   private final List<DestroyableObjective> objectivesWithPhases = new ArrayList<>();
   private final Map<DestroyablePhase, List<DestroyableObjective>> phases = new HashMap<>();
+  List<Objective> objectives;
+  private Match match;
+  private ObjectivesModule module;
 
   public ObjectivesBridge(ObjectivesModule module) {
     this.module = module;

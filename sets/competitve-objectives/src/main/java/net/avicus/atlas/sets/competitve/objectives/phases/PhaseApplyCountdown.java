@@ -62,8 +62,11 @@ public class PhaseApplyCountdown extends MatchCountdown {
     Localizable message = timeRemainingMessage(elapsedTime, remainingTime);
 
     // Boss bar
-    if (remainingTime.isShorterThan(BOSS_SHOWN_AT)) updateBossBar(message, elapsedTime);
-    else clearBossBars();
+    if (remainingTime.isShorterThan(BOSS_SHOWN_AT)) {
+      updateBossBar(message, elapsedTime);
+    } else {
+      clearBossBars();
+    }
 
     // Periodic chat broadcast
     if (shouldBroadcast(sec)) {
