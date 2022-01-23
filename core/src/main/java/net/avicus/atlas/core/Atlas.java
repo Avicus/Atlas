@@ -32,6 +32,7 @@ import net.avicus.atlas.core.command.KitCommands;
 import net.avicus.atlas.core.command.LoadoutCommands.ParentCommand;
 import net.avicus.atlas.core.command.ResourcePackCommand;
 import net.avicus.atlas.core.command.RotationCommands;
+import net.avicus.atlas.core.command.RuntimeConfigurableCommands;
 import net.avicus.atlas.core.command.StateCommands;
 import net.avicus.atlas.core.command.WorldEditCommands;
 import net.avicus.atlas.core.command.exception.CommandMatchException;
@@ -298,6 +299,7 @@ public class Atlas extends JavaPlugin {
     registrar.register(ResourcePackCommand.class);
     registrar.register(GroupParentCommand.class);
     registrar.register(GenericCommands.class);
+    registrar.register(RuntimeConfigurableCommands.ParentCommand.class);
 
     // Modular
     registrar.register(KitCommands.class);

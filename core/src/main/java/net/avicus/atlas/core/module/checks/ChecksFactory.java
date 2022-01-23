@@ -90,7 +90,7 @@ import org.joda.time.Duration;
 
 /**
  * Factory that will parse checks in XML anc add them to the match's {@link
- * net.avicus.atlas.match.registry.MatchRegistry}
+ * net.avicus.atlas.core.match.registry.MatchRegistry}
  */
 // We build filters first so they can be reference everywhere else.
 // We must use WeakReference's here because of this.

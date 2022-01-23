@@ -7,7 +7,7 @@ import net.avicus.atlas.core.module.checks.CheckContext;
 
 /**
  * A wrapper object that contains a block of code that can be executed inside of a {@link
- * net.avicus.atlas.match.Match}
+ * net.avicus.atlas.core.match.Match}
  */
 @ToString
 public abstract class Executor implements RegisterableObject<Executor> {

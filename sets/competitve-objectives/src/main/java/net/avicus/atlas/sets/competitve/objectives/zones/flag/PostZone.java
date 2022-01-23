@@ -12,8 +12,13 @@ import net.avicus.atlas.core.module.zones.Zone;
 import net.avicus.atlas.core.module.zones.ZoneMessage;
 import net.avicus.atlas.core.util.Messages;
 import net.avicus.atlas.core.util.region.BoundedRegion;
+import net.avicus.atlas.core.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.core.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.core.runtimeconfig.fields.RegisteredObjectField;
 import net.avicus.atlas.sets.competitve.objectives.flag.FlagObjective;
 import net.avicus.compendium.locale.text.Localizable;
+import org.apache.commons.lang3.ArrayUtils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @ToString
@@ -22,7 +27,7 @@ public class PostZone extends Zone {
   private static final Random random = new Random();
 
   private final float yaw;
-  private final Optional<Check> pickupCheck;
+  private Optional<Check> pickupCheck;
 
   public PostZone(Match match, BoundedRegion region, Optional<ZoneMessage> message, float yaw,
       Optional<Check> pickupCheck) {
@@ -55,5 +60,17 @@ public class PostZone extends Zone {
     }
     flag.setCurrentPost(Optional.of(this));
     flag.placeFlag(this.region.getRandomPosition(random), this.yaw, true);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new OptionalField<>("Pickup Check", () -> this.pickupCheck, (v) -> this.pickupCheck = v, new RegisteredObjectField<>("check", Check.class))
+    );
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Flag Post" + super.getDescription(viewer);
   }
 }

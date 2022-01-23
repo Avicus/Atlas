@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,12 +21,17 @@ import net.avicus.atlas.core.module.groups.GroupsModule;
 import net.avicus.atlas.core.module.loadouts.Loadout;
 import net.avicus.atlas.core.util.Events;
 import net.avicus.atlas.core.util.Players;
+import net.avicus.atlas.core.runtimeconfig.RuntimeConfigurable;
+import net.avicus.atlas.core.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.core.runtimeconfig.fields.DurationField;
+import net.avicus.atlas.core.runtimeconfig.fields.SimpleFields.BooleanField;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.joda.time.Duration;
 import org.joda.time.Instant;
 
 @ToString(exclude = "match")
-public class SpawnsModule implements Module {
+public class SpawnsModule implements Module, RuntimeConfigurable {
 
   @Getter
   private final Match match;
@@ -35,8 +41,8 @@ public class SpawnsModule implements Module {
   private final List<Player> spawningPlayers;
   private final Map<Player, RespawnTask> respawnTasks;
   @Getter
-  private final Duration respawnDelay;
-  private final boolean respawnFreeze;
+  private Duration respawnDelay;
+  private boolean respawnFreeze;
   @Getter
   @Setter
   private boolean autoRespawn;
@@ -184,5 +190,25 @@ public class SpawnsModule implements Module {
     }
 
     task.setAutoRespawn(true);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return new ConfigurableField[]{
+        new DurationField("Respawn Delay", () -> this.respawnDelay, (v) -> this.respawnDelay = v),
+        new BooleanField("Respawn Freeze", () -> this.respawnFreeze, (v) -> this.respawnFreeze = v),
+        new BooleanField("Auto Respawn", () -> this.autoRespawn, (v) -> this.autoRespawn = v),
+        new BooleanField("Respawn Blindness", () -> this.respawnBlindness, (v) -> this.respawnBlindness = v)
+    };
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Spawns";
+  }
+
+  @Override
+  public List<RuntimeConfigurable> getChildren() {
+    return this.spawns.stream().map(s -> (RuntimeConfigurable)s).collect(Collectors.toList());
   }
 }
