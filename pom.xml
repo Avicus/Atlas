@@ -29,15 +29,19 @@
     <!-- ProtoLib -->
     <repository>
       <id>dmulloy2</id>
-      <url>http://repo.dmulloy2.net/content/groups/public/</url>
+      <url>https://repo.dmulloy2.net/content/groups/public/</url>
     </repository>
     <repository>
-      <id>sk89q</id>
-      <url>http://maven.sk89q.com/repo/</url>
+      <id>sk89q-repo</id>
+      <url>https://maven.enginehub.org/repo/</url>
     </repository>
     <repository>
       <id>md5</id>
-      <url>http://repo.md-5.net/content/groups/public</url>
+      <url>https://repo.md-5.net/content/groups/public/</url>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
     </repository>
   </repositories>
   <dependencyManagement>
@@ -94,9 +98,9 @@
         </exclusions>
       </dependency>
       <dependency>
-        <groupId>com.keenant</groupId>
+        <groupId>com.github.thekeenant</groupId>
         <artifactId>tabbed</artifactId>
-        <version>1.7-SNAPSHOT</version>
+        <version>v1.8</version>
       </dependency>
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
