@@ -35,8 +35,9 @@
       <artifactId>tracker</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.keenant</groupId>
+      <groupId>com.github.thekeenant</groupId>
       <artifactId>tabbed</artifactId>
+      <version>v1.8</version>
     </dependency>
     <dependency>
       <groupId>com.sk89q.worldedit</groupId>
